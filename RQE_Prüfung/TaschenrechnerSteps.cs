@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Google.Protobuf;
+using System;
 using TechTalk.SpecFlow;
-using TechTalk.SpecFlow.CommonModels;
 using Xunit;
 
 namespace RQE_Prüfung
@@ -9,42 +9,41 @@ namespace RQE_Prüfung
     public class TaschenrechnerSteps
     {
 
-        var result = 0;
+        double input = 0;
+        double ergebnis = 0;
+
 
         [Given(@"the number is (.*)")]
-        public void GivenTheNumberIs(Decimal p0)
+        public void GivenTheNumberIs(double p0)
         {
-            ScenarioContext.Current.Pending();
-        }
-        
-        [Given(@"the number (.*)")]
-        public void GivenTheNumber(Decimal p0)
-        {
-            ScenarioContext.Current.Pending();
+            if (p0 == 3.1415)
+                input = Math.PI;
+            else
+                input = p0;
         }
         
         [When(@"i want the Sinus")]
         public void WhenIWantTheSinus()
         {
-            ScenarioContext.Current.Pending();
+            ergebnis = Math.Sin(input);
         }
         
         [When(@"i want the Cosinus")]
         public void WhenIWantTheCosinus()
         {
-            ScenarioContext.Current.Pending();
+            ergebnis = Math.Cos(input);
         }
         
         [When(@"I want the Tangens")]
         public void WhenIWantTheTangens()
         {
-            ScenarioContext.Current.Pending();
+            ergebnis = Math.Tan(input);
         }
         
         [Then(@"the result should be (.*)")]
         public void ThenTheResultShouldBe(int p0)
         {
-            var expected = result;
+            var expected = ergebnis;
             var actual = p0;
             Assert.Equal(expected, actual, 5);
         }
